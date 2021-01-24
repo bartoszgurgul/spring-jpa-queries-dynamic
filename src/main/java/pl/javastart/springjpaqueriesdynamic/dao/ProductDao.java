@@ -30,16 +30,13 @@ public class ProductDao {
     }
 
     public List<Product> getAll(){
-        final String getAllQuery = "SELECT p FROM Product p";
-        TypedQuery<Product> typedQuery = entityManager.createQuery(getAllQuery, Product.class);
-        List<Product> resultList = typedQuery.getResultList();
-        return  resultList;
+        TypedQuery<Product> namedQuery = entityManager.createNamedQuery("Product.findAll", Product.class);
+        return namedQuery.getResultList();
     }
 
     public void deleteAll(){
-        final String deleteAllQuery = "DELETE FROM Product p";
-        Query query = entityManager.createQuery(deleteAllQuery);
-        query.executeUpdate();
+        Query deleteAllQuery = entityManager.createNamedQuery("Product.deleteAll");
+        deleteAllQuery.executeUpdate();
     }
 
     public List<Product> customGet(String jpqlQuery){

@@ -1,12 +1,12 @@
 package pl.javastart.springjpaqueriesdynamic.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
+@NamedQuery(name = "Product.findAll", query = "SELECT p FROM Product p")
+@NamedQuery(name = "Product.findAllOrderByPrice", query = "SELECT p FROM Product p ORDER BY p.price asc")
+@NamedQuery(name = "Product.deleteAll", query = "DELETE FROM Product p")
 public class Product implements Serializable {
     private static final long serialVersionUID = -8903956080357392266L;
 
