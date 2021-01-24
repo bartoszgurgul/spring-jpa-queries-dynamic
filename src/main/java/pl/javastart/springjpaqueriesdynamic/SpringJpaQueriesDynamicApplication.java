@@ -44,6 +44,24 @@ public class SpringJpaQueriesDynamicApplication {
 
         productDao.deleteAll();
 
+        List<Product> productListSecond = new ArrayList<>();
+        productListSecond.add(new Product("Telewizor", "Samsung", 4500.0));
+        productListSecond.add(new Product("Opiekacz", "Opiex", 120.0));
+        productListSecond.add(new Product("Laptop", "Samsung", 3599.0));
+        productListSecond.add(new Product("Kino domowe", "Yamaha", 2600.0));
+        productListSecond.add(new Product("Smartfon", "Sony", 2100.0));
+
+
+        productListSecond.forEach(productDao::save);
+
+        productDao.deleteByProducer("Samsung");
+        System.out.println("Products without Samsung:");
+        productDao.getAll().forEach(System.out::println);
+
+        System.out.println("Opiekacze:");
+        List<Product> productByName = productDao.getByName("Opiekacz");
+        System.out.println(productByName);
+
         ctx.close();
 
     }

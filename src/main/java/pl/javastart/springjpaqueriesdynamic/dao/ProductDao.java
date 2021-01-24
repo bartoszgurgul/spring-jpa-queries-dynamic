@@ -39,8 +39,20 @@ public class ProductDao {
         deleteAllQuery.executeUpdate();
     }
 
+    public void deleteByProducer(String name){
+        Query query = entityManager.createQuery("DELETE FROM Product p WHERE p.producer=:producer");
+        query.setParameter("producer", name);
+        query.executeUpdate();
+    }
+
     public List<Product> customGet(String jpqlQuery){
         TypedQuery<Product> query = entityManager.createQuery(jpqlQuery, Product.class);
         return query.getResultList();
+    }
+
+    public List<Product> getByName(String name) {
+        TypedQuery<Product> namedQuery = entityManager.createNamedQuery("Product.findByName", Product.class);
+        namedQuery.setParameter("name", name);
+        return namedQuery.getResultList();
     }
 }
